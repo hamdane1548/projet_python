@@ -53,8 +53,8 @@ class Dashbord(QWidget):
         radio1_tas_fibo.setGeometry(40,180,150,30)
         radio2_B_arbre=QRadioButton("B-ARBRE",self)
         radio2_B_arbre.setGeometry(40,210,150,30)
-        radio3_DIJIKSTRA=QRadioButton("Dijkstra",self)
-        radio3_DIJIKSTRA.setGeometry(40,240,150,30)
+        self.radio3_DIJIKSTRA=QRadioButton("Dijkstra",self)
+        self.radio3_DIJIKSTRA.setGeometry(40,240,150,30)
         self.setStyleSheet("QRadioButton{""color:white;""}")
         #tetse les algortime
         image_teste=QPixmap("projet/teste.png")
@@ -96,3 +96,8 @@ class Dashbord(QWidget):
         label_logo_mudiapolis.setPixmap(pixampmundiapolis)
         label_logo_mudiapolis.setGeometry(20,550,200,200)
         label_logo_mudiapolis.setScaledContents(True)
+    
+
+
+            
+            
