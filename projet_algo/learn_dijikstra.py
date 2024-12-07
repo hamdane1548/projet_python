@@ -18,7 +18,7 @@ class learn_dijikstra(QMainWindow):
        self.setGeometry(0,0,screen_widt,screen_height)
        self.setWindowTitle("Projet Alogirthme")
        self.setWindowIcon(QIcon("projet/python.png"))
-       
+       home_pages.fond(self)
        self.footer=footer()
        self.footer.setParent(self)
        self.footer.setGeometry(260,670,1085,50)
@@ -119,7 +119,19 @@ class learn_dijikstra(QMainWindow):
         self.central.setLayout(self.layout)
         self.scrollable_widget = ScrollableWidget()  # Appel au widget défilable
         self.scrollable_widget.setParent(self)  # Ajout du widget défilable au layout
-        self.scrollable_widget.setGeometry(250, 150, 1100, 500)
+        self.scrollable_widget.setGeometry(250, 150, 1100, 550)
+        self.mon_dashbord.button_return_accueil.clicked.connect(self.return_accueil)
+        self.mon_dashbord.radio2_B_arbre.toggled.connect(self.ouvrie_learn_b_arbre)
+    def ouvrie_learn_b_arbre(self):
+        from learn_barbre import learn_barbre
+        self.barbre_learn=learn_barbre()
+        self.barbre_learn.showMaximized()
+        self.close()
+    def return_accueil(self):
+        from home_pages import home_pages
+        self.homepages=home_pages()
+        self.homepages.showMaximized()
+        self.close()
     def update_time(self):
         current_time=QTime.currentTime().toString("hh : mm : ss ")
         self.time.setText(current_time)
@@ -127,6 +139,7 @@ def main():
     app=QApplication(sys.argv)
     window=learn_dijikstra()
     window.show()
+    window.showMaximized()
     sys.exit(app.exec())
 
 if __name__ == "__main__":

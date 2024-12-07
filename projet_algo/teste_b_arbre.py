@@ -7,13 +7,14 @@ from nav_bar import Navbar
 from teste import ScrollableWidget
 from footer import footer
 from home_pages import home_pages
+from barbre_composent.logique_arbre import BTree
+from barbre_composent.btree_widget import BTreeWidget
 class test_barbre(QMainWindow):
     def __init__(self):
         super().__init__()
         self.initalis_interface_principal()
         self.b_arbre_entre_user()
-        self.initlise_les_parmetre_arbre()
-        self.calcul_taille_noude_est_enfant()
+
     def initalis_interface_principal(self):
        screen_geomtry=QApplication.primaryScreen().availableGeometry()
        screen_widt=screen_geomtry.width()
@@ -111,6 +112,10 @@ class test_barbre(QMainWindow):
         self.tailleentre_line_edit=QLineEdit(self)
         self.tailleentre_line_edit.setGeometry(420,186,100,20)
         self.tailleentre_line_edit.setPlaceholderText("entre")
+        self.buttonsumbit=QPushButton("Submit",self)
+        self.buttonsumbit.setGeometry(530,185,50,24)
+        self.buttonsumbit.setStyleSheet("background:black;color:white;border:solid black 5px; border-radius:10px; border-color:black;font-size:14px;")
+        self.buttonsumbit.clicked.connect(self.push)
         #element a inesere
         self.insere_label=QLabel("Entre le element a insere:",self)
         self.insere_label.setGeometry(260,220,180,30)  
@@ -118,6 +123,10 @@ class test_barbre(QMainWindow):
         self.insere_line_edit=QLineEdit(self)
         self.insere_line_edit.setGeometry(429,225,100,20)
         self.insere_line_edit.setPlaceholderText("entre")
+        self.buttonsumbit2=QPushButton("Submit",self)
+        self.buttonsumbit2.setGeometry(530,223,50,24)
+        self.buttonsumbit2.setStyleSheet("background:black;color:white;border:solid black 5px; border-radius:10px; border-color:black;font-size:14px;")
+        self.buttonsumbit2.clicked.connect(self.add_keys)
         #le element a supprimer
         self.supprimer_label=QLabel("Entre le element a supprimer:",self)
         self.supprimer_label.setGeometry(260,260,200,30)  
@@ -125,6 +134,9 @@ class test_barbre(QMainWindow):
         self.supprimer_line_edit=QLineEdit(self)
         self.supprimer_line_edit.setGeometry(460,265,100,20)
         self.supprimer_line_edit.setPlaceholderText("entre")
+        self.buttonsumbit3=QPushButton("Submit",self)
+        self.buttonsumbit3.setGeometry(565,262,50,24)
+        self.buttonsumbit3.setStyleSheet("background:black;color:white;border:solid black 5px; border-radius:10px; border-color:black;font-size:14px;")
     def dashbord(self):
         self.central=QWidget()
         self.setCentralWidget(self.central)
@@ -133,18 +145,38 @@ class test_barbre(QMainWindow):
         self.layout.addWidget(self.mon_dashbord)
         self.layout.setContentsMargins(0,0,0,0)
         self.central.setLayout(self.layout)
-    def initlise_les_parmetre_arbre(self):
-        liste_entreuser=[]   
-    def calcul_taille_noude_est_enfant(self,ordre):
-        self.max_noued=ordre-1
-        self.nb_enfant=ordre
+        
     def update_time(self):
         current_time=QTime.currentTime().toString("hh : mm : ss ")
         self.time.setText(current_time)
+    def push(self):
+     texte = self.tailleentre_line_edit.text()
+     if texte.isdigit():
+        self.value = int(texte)
+        self.btree = BTree(self.value)
+        self.btee_widget = BTreeWidget(self.btree)
+        
+        self.btee_widget.setParent(self)
+        self.btee_widget.setGeometry(700, 100, 800, 400)  
+        self.btee_widget.show()
+     else:
+         print("Invalid input for node size")
+
+    def add_keys(self):
+      texte = self.insere_line_edit.text().strip()
+      if texte.isdigit():
+        key = int(texte)
+        self.btree.insert(key)
+        self.btee_widget.update() 
+        print(f"Key {key} inserted into the B-tree")
+      else:
+        print("Invalid input for key insertion")
+      self.insere_line_edit.clear()
+
 def main():
     app=QApplication(sys.argv)
     window=test_barbre()
-    window.show()
+    window.showMaximized()
     sys.exit(app.exec())
 
 if __name__ == "__main__":

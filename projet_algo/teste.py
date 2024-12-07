@@ -1,5 +1,6 @@
 from PyQt6.QtWidgets import QWidget, QScrollArea, QLabel,QVBoxLayout,QFrame,QPushButton,QFileDialog
 from PyQt6.QtGui import QPixmap,QMovie
+from PyQt6.QtCore import Qt
 import shutil
 import os
 from home_pages import home_pages
@@ -10,10 +11,12 @@ class ScrollableWidget(QWidget):
         # Scroll Area
         scroll_area = QScrollArea()
         scroll_area.setFrameShape(QFrame.Shape.NoFrame)
-        scroll_area.setStyleSheet("background:red;")
+        self.setWindowFlags(Qt.WindowType.FramelessWindowHint)
+        self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground,True)
         scroll_area.setStyleSheet("""
             QScrollArea {
-                border: none;  /* No border around the scroll area */
+                border: none;
+                background:transparent;
             }
             QScrollBar:vertical {
                 background-color: #f0f0f0;
@@ -56,6 +59,7 @@ class ScrollableWidget(QWidget):
         """)
         scroll_area.setWidgetResizable(True)
         content_widget = QWidget(self)
+        content_widget.setStyleSheet("background:transparent;")
         label_definition_titre = QLabel("1.Explication Algorithme Dijkstra", content_widget)
         label_definition_titre.setStyleSheet("color:red;font-size:16px")
         label_definition_titre.setGeometry(10, 0, 230, 30)  #
@@ -83,6 +87,7 @@ class ScrollableWidget(QWidget):
         self.telcharge_cours.setGeometry(745,80,60,30)
         self.telcharge_cours.clicked.connect(self.telchargefile)
         # Definition text
+        
         label_definition = QLabel(
             "L'algorithme de Dijkstra est un algorithme fondamental en informatique et en théorie des graphes\n"
             "utilisé pour trouver le chemin le plus court entre un nœud source et tous les autres nœuds\n"
@@ -92,52 +97,56 @@ class ScrollableWidget(QWidget):
             "ses applications et quelques exemples pratiques.", content_widget
         )
         label_definition.setStyleSheet("color:black;font-size:12px;")
-        label_definition.setGeometry(10, 170, 530, 100)  # Position and size of the text
-
-        images_definition_dijikstre = QPixmap("projet/napkin-selection (17).png")
+        label_definition.setGeometry(10, 170, 530, 100)  
+        
+        images_definition_dijikstre = QMovie("projet/map_distance.gif")
         label_images_definiton = QLabel(content_widget)
-        label_images_definiton.setPixmap(images_definition_dijikstre)
-        label_images_definiton.setFixedSize(430, 100)  
-        label_images_definiton.setGeometry(500, 170, 330, 100) 
+        label_images_definiton.setMovie(images_definition_dijikstre)
+        label_images_definiton.setGeometry(600, 120, 400, 400)
+        label_images_definiton.setScaledContents(True)
+        images_definition_dijikstre.start()
+       
         #Fonctionnement de l'algorithme de Dijkstra
         self.label_foncationement=QLabel("2.Fonctionnement de l'algorithme de Dijkstra",content_widget)
-        self.label_foncationement.setGeometry(10,200,350,30)
+        self.label_foncationement.setGeometry(10,270,350,30)
         self.label_foncationement.setStyleSheet("color:red;font-size:15px")
         scroll_area.setWidget(content_widget)
+        
         #Initialisation 
         self.Initialisationlabel=QLabel("2.1Initialisation",content_widget)
-        self.Initialisationlabel.setGeometry(15,190,350,30)
+        self.Initialisationlabel.setGeometry(15,290,350,30)
         self.Initialisationlabel.setStyleSheet("color:green;font-size:15px")
         self.label_initeil_desc=QLabel("1.Attribuez une distance de 0 0 au nœud de départ et une distance infinie (∞∞)\n à tous les autres nœuds.",content_widget)
-        self.label_initeil_desc.setGeometry(18,210,460,60)
+        self.label_initeil_desc.setGeometry(18,310,460,60)
         self.label_initeil_desc2=QLabel("2.Marquez tous les nœuds comme non visités.",content_widget)
-        self.label_initeil_desc2.setGeometry(18,240,460,60)
+        self.label_initeil_desc2.setGeometry(18,340,460,60)
         self.label_initeil_desc3=QLabel("3.Créez un ensemble de nœuds non visités",content_widget)
-        self.label_initeil_desc3.setGeometry(18,265,460,60)
+        self.label_initeil_desc3.setGeometry(18,365,460,60)
         #Étape principale
         self.principale=QLabel("2.2 Étape principale",content_widget)
-        self.principale.setGeometry(15,310,350,30)
+        self.principale.setGeometry(15,410,350,30)
         self.principale.setStyleSheet("color:green;font-size:15px")
         self.principale_desc=QLabel("1.Choisissez le nœud non visité ayant la plus petite distance actuelle.",content_widget)
-        self.principale_desc.setGeometry(18,330,460,60)
+        self.principale_desc.setGeometry(18,420,460,60)
         self.principale_desc2=QLabel("2.Examinez tous ses voisins non visités.",content_widget)
-        self.principale_desc2.setGeometry(18,360,460,60)
+        self.principale_desc2.setGeometry(18,450,460,60)
         self.principale_desc3=QLabel("3.Pour chaque voisin, calculez une distance temporaire \n:distance temporaire=distance du nœud courant+ poids de l’areˆtedistance \ntemporaire=distance du nœud courant+poids de l’ar eˆteSi\n cette distance temporaire est inférieure à la distance \nactuellement attribuée au voisin, \nmettez à jour cette distance.",content_widget)
-        self.principale_desc3.setGeometry(18,410,460,60)
+        self.principale_desc3.setGeometry(18,500,460,60)
         #etape marquage
         self.Marquage_title=QLabel("2.3Marquage",content_widget)
-        self.Marquage_title.setGeometry(15,480,120,30)
+        self.Marquage_title.setGeometry(15,568,120,30)
         self.Marquage_title.setStyleSheet("color:green;font-size:15px;")
         self.Marquage_description1=QLabel("Marquez le nœud courant comme visité. Une fois visité, il ne sera plus traité.",content_widget)
-        self.Marquage_description1.setGeometry(18,510,430,35)
+        self.Marquage_description1.setGeometry(18,590,430,35)
+        
         # etapee Répétition 
         self.Repetition=QLabel("2.4Répétition",content_widget)
-        self.Repetition.setGeometry(15,550,120,30)
+        self.Repetition.setGeometry(15,630,120,30)
         self.Repetition.setStyleSheet("color:green;font-size:15px;")
         self.Repetition_description=QLabel("Répétez les étapes 2 et 3 jusqu'à ce que tous les nœuds soient visités ou que le nœud cible soit atteint \n(si vous cherchez un chemin spécifique).",content_widget)
-        self.Repetition_description.setGeometry(17,570,290,50)
-    
-        content_widget.setFixedSize(1000, 650)
+        self.Repetition_description.setGeometry(17,660,290,50)
+        
+        content_widget.setFixedSize(1000, 750)
         scroll_area.setWidget(content_widget)
         #-------------------------------
         

@@ -198,10 +198,16 @@ class home_pages(QMainWindow):
         self.layout.setContentsMargins(0,0,0,0)
         self.central.setLayout(self.layout)
         self.mon_dashbord.radio3_DIJIKSTRA.toggled.connect(self.ouvriehomepages)
+        self.mon_dashbord.radio2_B_arbre.toggled.connect(self.ouvrie_learn_b_arbre)
     def ouvriehomepages(self):
         from learn_dijikstra import learn_dijikstra
         self.dijkstra_window = learn_dijikstra()
-        self.dijkstra_window.show()
+        self.dijkstra_window.showMaximized()
+        self.close()
+    def ouvrie_learn_b_arbre(self):
+        from learn_barbre import learn_barbre
+        self.barbre_learn=learn_barbre()
+        self.barbre_learn.showMaximized()
         self.close()
     def fond(self):
        self.fond=QPixmap("projet/fond.png")
@@ -283,6 +289,7 @@ def main():
     app=QApplication(sys.argv)
     window=home_pages()
     window.show()
+    window.showMaximized()
     sys.exit(app.exec())
 
 if __name__ == "__main__":
