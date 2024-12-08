@@ -121,7 +121,25 @@ class learn_tas_fibo(QMainWindow):
         self.scrollable_widget.setParent(self)  # Ajout du widget défilable au layout
         self.scrollable_widget.setGeometry(250, 150, 1100, 550)
         self.mon_dashbord.button_return_accueil.clicked.connect(self.return_accueil)
+        self.mon_dashbord.button_about.clicked.connect(self.about)
+        self.mon_dashbord.radio3_DIJIKSTRA.toggled.connect(self.ouvriehomepages)
         self.mon_dashbord.radio2_B_arbre.toggled.connect(self.ouvrie_learn_b_arbre)
+        self.mon_dashbord.radio2_teste_b_arbre.toggled.connect(self.ouvrireteste_barbre)
+    def ouvrireteste_barbre(self):
+        from teste_b_arbre import test_barbre
+        self.teste_barbe=test_barbre()
+        self.teste_barbe.showMaximized()
+        self.close()
+    def ouvriehomepages(self):
+        from learn_dijikstra import learn_dijikstra
+        self.dijkstra_window = learn_dijikstra()
+        self.dijkstra_window.showMaximized()
+        self.close()
+    def about(self):
+        from About import About
+        self.abouthh=About()
+        self.abouthh.showMaximized()
+        self.close()
     def ouvrie_learn_b_arbre(self):
         from learn_barbre import learn_barbre
         self.barbre_learn=learn_barbre()

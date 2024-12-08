@@ -4,10 +4,9 @@ from PyQt6.QtGui import QIcon,QPixmap,QMovie
 from PyQt6.QtCore import QTimer,QTime,Qt
 from Dashbord import Dashbord
 from nav_bar import Navbar
-from teste import ScrollableWidget
 from footer import footer
 from home_pages import home_pages
-class learn_dijikstra(QMainWindow):
+class Devloppeur_application(QMainWindow):
     def __init__(self):
         super().__init__()
         self.initalis_interface_principal()
@@ -24,8 +23,22 @@ class learn_dijikstra(QMainWindow):
        self.footer.setGeometry(260,670,1085,50)
        self.navbar()
        self.dashbord()
-       
     def navbar(self):
+       self.carte_oussama=QPixmap("projet/Hamdane oussama.png")
+       self.label_oussama=QLabel(self)
+       self.label_oussama.setPixmap(self.carte_oussama)
+       self.label_oussama.setGeometry(280,180,450,450)
+       self.label_oussama.setScaledContents(True)
+       self.carte_oussama2=QPixmap("projet/Hamdane oussama2.png")
+       self.label_oussama2=QLabel(self)
+       self.label_oussama2.setPixmap(self.carte_oussama2)
+       self.label_oussama2.setGeometry(900,180,450,450)
+       self.label_oussama2.setScaledContents(True)
+       self.logo=QPixmap("projet/200.png")
+       self.logog_label=QLabel(self)
+       self.logog_label.setPixmap(self.logo)
+       self.logog_label.setGeometry(670,220,300,300)
+       self.logog_label.setScaledContents(True)
        labe_tite=QLabel(self)
        labe_tite.setGeometry(270,10,1070,50)
        labe_tite.setStyleSheet("background:#86847e;""border:5px #86847e ;"" border-radius:10px;")
@@ -117,33 +130,12 @@ class learn_dijikstra(QMainWindow):
         self.layout.addWidget(self.mon_dashbord)
         self.layout.setContentsMargins(0,0,0,0)
         self.central.setLayout(self.layout)
-        self.scrollable_widget = ScrollableWidget()  # Appel au widget défilable
-        self.scrollable_widget.setParent(self)  # Ajout du widget défilable au layout
-        self.scrollable_widget.setGeometry(250, 150, 1100, 550)
         self.mon_dashbord.button_return_accueil.clicked.connect(self.return_accueil)
-        self.mon_dashbord.radio2_B_arbre.toggled.connect(self.ouvrie_learn_b_arbre)
-        self.mon_dashbord.radio1_tas_fibo.toggled.connect(self.learn_tas)
-        self.mon_dashbord.button_about.clicked.connect(self.about)
-        self.mon_dashbord.radio2_teste_b_arbre.toggled.connect(self.ouvrireteste_barbre)
-    def ouvrireteste_barbre(self):
-        from teste_b_arbre import test_barbre
-        self.teste_barbe=test_barbre()
-        self.teste_barbe.showMaximized()
-        self.close()
-    def about(self):
-        from About import About
-        self.abouthh=About()
-        self.abouthh.showMaximized()
-        self.close()
-    def learn_tas(self):
-        from tas_fibo_learn import learn_tas_fibo
-        self.fibo_learn=learn_tas_fibo()
-        self.fibo_learn.showMaximized()
-        self.close()
-    def ouvrie_learn_b_arbre(self):
-        from learn_barbre import learn_barbre
-        self.barbre_learn=learn_barbre()
-        self.barbre_learn.showMaximized()
+        self.mon_dashbord.radio3_DIJIKSTRA.toggled.connect(self.ouvriehomepages)
+    def ouvriehomepages(self):
+        from learn_dijikstra import learn_dijikstra
+        self.dijkstra_window = learn_dijikstra()
+        self.dijkstra_window.showMaximized()
         self.close()
     def return_accueil(self):
         from home_pages import home_pages
@@ -155,9 +147,9 @@ class learn_dijikstra(QMainWindow):
         self.time.setText(current_time)
 def main():
     app=QApplication(sys.argv)
-    window=learn_dijikstra()
-    window.show()
-    window.showMaximized()
+    window2=Devloppeur_application()
+    window2.show()
+    window2.showMaximized()
     sys.exit(app.exec())
 
 if __name__ == "__main__":

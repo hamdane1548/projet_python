@@ -4,10 +4,9 @@ from PyQt6.QtGui import QIcon,QPixmap,QMovie
 from PyQt6.QtCore import QTimer,QTime,Qt
 from Dashbord import Dashbord
 from nav_bar import Navbar
-from teste import ScrollableWidget
 from footer import footer
 from home_pages import home_pages
-class learn_dijikstra(QMainWindow):
+class About(QMainWindow):
     def __init__(self):
         super().__init__()
         self.initalis_interface_principal()
@@ -24,7 +23,34 @@ class learn_dijikstra(QMainWindow):
        self.footer.setGeometry(260,670,1085,50)
        self.navbar()
        self.dashbord()
-       
+       self.images_about_us=QPixmap("projet/About us.png")
+       self.images_label_about_us=QLabel(self)
+       self.images_label_about_us.setPixmap(self.images_about_us)
+       self.images_label_about_us.setGeometry(520,20,600,600)
+       self.descirption_aboutus=QLabel("Bienvenue sur AlgoTest, votre application interactive dédiée à l'apprentissage et au test des algorithmes les plus célèbres en informatique ! Conçue pour les étudiants, les enseignants, et les passionnés\n                                                                           d'algorithmes, AlgoTest rend l'exploration des structures de données et des algorithmes à la fois intuitive et engageante.",self)
+       self.descirption_aboutus.setStyleSheet("font-size:12px;")
+       self.descirption_aboutus.setGeometry(270,460,1200,100)
+       self.about_descrption=QLabel("Ce que propose AlgoTest",self)
+       self.about_descrption.setStyleSheet("font-size:30px")
+       self.about_descrption.setGeometry(620,540,360,40)
+       self.dijikstra_des=QMovie("projet/DIJIKSTRA_learn.gif")
+       self.dijikstra_des_lable=QLabel(self)
+       self.dijikstra_des_lable.setMovie(self.dijikstra_des)
+       self.dijikstra_des_lable.setGeometry(580,560,100,100)
+       self.dijikstra_des_lable.setScaledContents(True)
+       self.dijikstra_des.start()
+       self.b_arbre_learngif_des=QMovie("projet/b_arbre_learngif.gif")
+       self.b_arbre_learngif_des_des_lable=QLabel(self)
+       self.b_arbre_learngif_des_des_lable.setMovie(self.b_arbre_learngif_des)
+       self.b_arbre_learngif_des_des_lable.setGeometry(740,560,100,100)
+       self.b_arbre_learngif_des_des_lable.setScaledContents(True)
+       self.b_arbre_learngif_des.start()
+       self.fibonacci_learngif_des=QMovie("projet/fibonacci.gif")
+       self.fibo_des_des_lable=QLabel(self)
+       self.fibo_des_des_lable.setMovie(self.fibonacci_learngif_des)
+       self.fibo_des_des_lable.setGeometry(930,565,100,100)
+       self.fibo_des_des_lable.setScaledContents(True)
+       self.fibonacci_learngif_des.start()
     def navbar(self):
        labe_tite=QLabel(self)
        labe_tite.setGeometry(270,10,1070,50)
@@ -117,10 +143,8 @@ class learn_dijikstra(QMainWindow):
         self.layout.addWidget(self.mon_dashbord)
         self.layout.setContentsMargins(0,0,0,0)
         self.central.setLayout(self.layout)
-        self.scrollable_widget = ScrollableWidget()  # Appel au widget défilable
-        self.scrollable_widget.setParent(self)  # Ajout du widget défilable au layout
-        self.scrollable_widget.setGeometry(250, 150, 1100, 550)
         self.mon_dashbord.button_return_accueil.clicked.connect(self.return_accueil)
+        self.mon_dashbord.radio3_DIJIKSTRA.toggled.connect(self.ouvriehomepages)
         self.mon_dashbord.radio2_B_arbre.toggled.connect(self.ouvrie_learn_b_arbre)
         self.mon_dashbord.radio1_tas_fibo.toggled.connect(self.learn_tas)
         self.mon_dashbord.button_about.clicked.connect(self.about)
@@ -145,6 +169,11 @@ class learn_dijikstra(QMainWindow):
         self.barbre_learn=learn_barbre()
         self.barbre_learn.showMaximized()
         self.close()
+    def ouvriehomepages(self):
+        from learn_dijikstra import learn_dijikstra
+        self.dijkstra_window = learn_dijikstra()
+        self.dijkstra_window.showMaximized()
+        self.close()
     def return_accueil(self):
         from home_pages import home_pages
         self.homepages=home_pages()
@@ -155,7 +184,7 @@ class learn_dijikstra(QMainWindow):
         self.time.setText(current_time)
 def main():
     app=QApplication(sys.argv)
-    window=learn_dijikstra()
+    window=About()
     window.show()
     window.showMaximized()
     sys.exit(app.exec())

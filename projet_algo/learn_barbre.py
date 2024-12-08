@@ -122,6 +122,24 @@ class learn_barbre(QMainWindow):
         self.scrollable_widget.setGeometry(250, 150, 1100, 550)
         self.mon_dashbord.button_return_accueil.clicked.connect(self.return_accueil)
         self.mon_dashbord.radio3_DIJIKSTRA.toggled.connect(self.ouvriehomepages)
+        self.mon_dashbord.radio1_tas_fibo.toggled.connect(self.learn_tas)
+        self.mon_dashbord.button_about.clicked.connect(self.about)
+        self.mon_dashbord.radio2_teste_b_arbre.toggled.connect(self.ouvrireteste_barbre)
+    def ouvrireteste_barbre(self):
+        from teste_b_arbre import test_barbre
+        self.teste_barbe=test_barbre()
+        self.teste_barbe.showMaximized()
+        self.close()
+    def about(self):
+        from About import About
+        self.abouthh=About()
+        self.abouthh.showMaximized()
+        self.close()
+    def learn_tas(self):
+        from tas_fibo_learn import learn_tas_fibo
+        self.fibo_learn=learn_tas_fibo()
+        self.fibo_learn.showMaximized()
+        self.close()
     def ouvriehomepages(self):
         from learn_dijikstra import learn_dijikstra
         self.dijkstra_window = learn_dijikstra()

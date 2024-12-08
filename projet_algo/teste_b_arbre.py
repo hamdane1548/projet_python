@@ -145,7 +145,36 @@ class test_barbre(QMainWindow):
         self.layout.addWidget(self.mon_dashbord)
         self.layout.setContentsMargins(0,0,0,0)
         self.central.setLayout(self.layout)
-        
+        self.mon_dashbord.button_return_accueil.clicked.connect(self.return_accueil)
+        self.mon_dashbord.radio3_DIJIKSTRA.toggled.connect(self.ouvriehomepages)
+        self.mon_dashbord.radio2_B_arbre.toggled.connect(self.ouvrie_learn_b_arbre)
+        self.mon_dashbord.radio1_tas_fibo.toggled.connect(self.learn_tas)
+        self.mon_dashbord.button_about.clicked.connect(self.about)
+    def return_accueil(self):
+        from home_pages import home_pages
+        self.homepages=home_pages()
+        self.homepages.showMaximized()
+        self.close()
+    def ouvriehomepages(self):
+        from learn_dijikstra import learn_dijikstra
+        self.dijkstra_window = learn_dijikstra()
+        self.dijkstra_window.showMaximized()
+        self.close()
+    def about(self):
+        from About import About
+        self.abouthh=About()
+        self.abouthh.showMaximized()
+        self.close()
+    def learn_tas(self):
+        from tas_fibo_learn import learn_tas_fibo
+        self.fibo_learn=learn_tas_fibo()
+        self.fibo_learn.showMaximized()
+        self.close()
+    def ouvrie_learn_b_arbre(self):
+        from learn_barbre import learn_barbre
+        self.barbre_learn=learn_barbre()
+        self.barbre_learn.showMaximized()
+        self.close()
     def update_time(self):
         current_time=QTime.currentTime().toString("hh : mm : ss ")
         self.time.setText(current_time)

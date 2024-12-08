@@ -197,17 +197,48 @@ class home_pages(QMainWindow):
         self.layout.addWidget(self.mon_dashbord)
         self.layout.setContentsMargins(0,0,0,0)
         self.central.setLayout(self.layout)
+        self.mon_dashbord.button_about.clicked.connect(self.devloppeurr)
         self.mon_dashbord.radio3_DIJIKSTRA.toggled.connect(self.ouvriehomepages)
         self.mon_dashbord.radio2_B_arbre.toggled.connect(self.ouvrie_learn_b_arbre)
+        self.mon_dashbord.radio2_teste_b_arbre.toggled.connect(self.ouvrireteste_barbre)
+        self.mon_dashbord.radio1_tas_fibo.toggled.connect(self.learn_tas)
+        self.mon_dashbord.profile_application2.clicked.connect(self.about)
+        self.putton_arbre.clicked.connect(self.ouvrireteste_barbre)
+    def clear_layout(self):
+        while self.layout.count():
+            child = self.layout.takeAt(0)
+            if child.widget():
+                child.widget().deleteLater()
     def ouvriehomepages(self):
         from learn_dijikstra import learn_dijikstra
         self.dijkstra_window = learn_dijikstra()
         self.dijkstra_window.showMaximized()
         self.close()
+    def about(self):
+        self.clear_layout()
+        from About import About
+        self.abouthh=About()
+        self.abouthh.showMaximized()
+        self.close()
+    def devloppeurr(self):
+        from About import About
+        self.Aboutk=About()
+        self.Aboutk.showMaximized()
+        self.close()
+    def learn_tas(self):
+        from tas_fibo_learn import learn_tas_fibo
+        self.fibo_learn=learn_tas_fibo()
+        self.fibo_learn.showMaximized()
+        self.close()
     def ouvrie_learn_b_arbre(self):
         from learn_barbre import learn_barbre
         self.barbre_learn=learn_barbre()
         self.barbre_learn.showMaximized()
+        self.close()
+    def ouvrireteste_barbre(self):
+        from teste_b_arbre import test_barbre
+        self.teste_barbe=test_barbre()
+        self.teste_barbe.showMaximized()
         self.close()
     def fond(self):
        self.fond=QPixmap("projet/fond.png")
