@@ -201,13 +201,9 @@ class home_pages(QMainWindow):
         self.mon_dashbord.radio3_DIJIKSTRA.toggled.connect(self.ouvriehomepages)
         self.mon_dashbord.radio2_B_arbre.toggled.connect(self.ouvrie_learn_b_arbre)
         self.mon_dashbord.radio2_teste_b_arbre.toggled.connect(self.ouvrireteste_barbre)
-        self.mon_dashbord.radio3_testo_DIJIKSTRA.toggled.connect(self.ouvriretest_dijikstra)
-        self.mon_dashbord.radio1_teste_fibo.toggled.connect(self.ouvriretest_fibonacci)
         self.mon_dashbord.radio1_tas_fibo.toggled.connect(self.learn_tas)
         self.mon_dashbord.profile_application2.clicked.connect(self.about)
         self.putton_arbre.clicked.connect(self.ouvrireteste_barbre)
-        self.putton_arbre.clicked.connect(self.ouvriretest_dijikstra)
-        self.putton_arbre.clicked.connect(self.ouvriretest_fibonacci)
     def clear_layout(self):
         while self.layout.count():
             child = self.layout.takeAt(0)
@@ -244,16 +240,6 @@ class home_pages(QMainWindow):
         self.teste_barbe=test_barbre()
         self.teste_barbe.showMaximized()
         self.close()
-    def ouvriretest_dijikstra(self):
-        from test_dijikstra import TestDijkstra
-        self.test_dijikstra=TestDijkstra()
-        self.test_dijikstra.showMaximized()
-        self.close()
-    def ouvriretest_fibonacci(self):
-        from test_fibonnaci import TestTasFibonacci
-        self.test_fibonacci=TestTasFibonacci()
-        self.test_fibonacci.showMaximized()
-        self.close()               
     def fond(self):
        self.fond=QPixmap("projet/fond.png")
        self.fond_lable=QLabel(self)

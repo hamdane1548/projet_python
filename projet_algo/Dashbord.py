@@ -66,12 +66,12 @@ class Dashbord(QWidget):
         titre_teste_algorithme.setGeometry(60,285,300,30)
         titre_teste_algorithme.setStyleSheet("color:white;""font-size:15px;""font-family:italic;")
         # radio de teste les algorithme
-        radio1_teste_fibo=QRadioButton("Tas de Fibonacci",self)
-        radio1_teste_fibo.setGeometry(40,320,150,30)
+        self.radio1_teste_fibo=QRadioButton("Tas de Fibonacci",self)
+        self.radio1_teste_fibo.setGeometry(40,320,150,30)
         self.radio2_teste_b_arbre=QRadioButton("B-arbre",self)
         self.radio2_teste_b_arbre.setGeometry(40,350,150,30)
-        radio3_testo_DIJIKSTRA=QRadioButton("Dijikstre",self)
-        radio3_testo_DIJIKSTRA.setGeometry(40,380,150,30)
+        self.radio3_testo_DIJIKSTRA=QRadioButton("Dijikstre",self)
+        self.radio3_testo_DIJIKSTRA.setGeometry(40,380,150,30)
         #About
         self.button_about=QPushButton("About Application",self)
         self.button_about.setGeometry(60,500,200,30) 
